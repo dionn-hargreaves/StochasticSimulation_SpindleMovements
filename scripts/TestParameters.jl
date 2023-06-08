@@ -1,0 +1,15 @@
+Notes           = "N15_won_0p003" # notes for identification of simulation run, parameters will also be saved
+NumGenerators   = 15 # per cortex
+NumStates       = 6000 # number of states for extension length, recalculate for efficiency
+burnTime        = 5000000 # pre-saving time, to dispose of initial transients, timesteps not simulation time
+finalTime       = 10000000000 # timesteps not simulation time
+maxExt          = 6                     # maximum extension available
+α               = 0.08
+β               = 0.04
+Γ               = 1000/50
+γ               = 2
+z               = 0
+μ               = 50
+K               = 5e-2
+ω_0             = 0.001
+ω_on            = 0.003
