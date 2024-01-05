@@ -98,7 +98,7 @@ using GillespieTransitions
     while j != (finalTime+burnTime)
 
         j+=1 # tick time
-	DzDt = (1/0.625).*( -K*z[end]-(sum(ExtList[GenList[BoundDown,1]])-sum(ExtList[GenList[BoundUp,1]]))) # new spindle velocity
+	DzDt = (1/0.625).*( -K*z[end]-(sum(ExtList[GenList[BoundDown,1]])-sum(ExtList[GenList[BoundUp,1]]))) # new spindle velocity, xi=0.625, fix this value being hardcoded
         push!(DzDt_loop, DzDt)
         newtPassed = gillespieTran!(stateIndVec, MastParams, tPassed)
         ## returns stateIndVec[2], inidex of changed generator, stateIndVec[1], how generator is affected, and new sim time
@@ -123,7 +123,7 @@ using GillespieTransitions
         z = z + (newtPassed-tPassed)*DzDt # new spindle position, forward Euler
         tPassed = newtPassed
 
-        if abs(DzDt_loop[2]-DzDt_loop[1]) > 0.2 || mod(j,10) == 2 ### may  reduce computational time
+        if abs(DzDt_loop[2]-DzDt_loop[1]) > 0.2 || mod(j,10) == 2 ###   reduce computational time, only update in mod window or if dz/dt changes by > 0.2 (sig.  change)
 
             upV = 1.0 .- ExtList .- DzDt        # new v+ for parameters
             downV = 1.0 .- ExtList .+ DzDt      # new v- for parameters
